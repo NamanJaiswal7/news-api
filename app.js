@@ -1,5 +1,6 @@
 const express = require('express');
 const morgan = require('morgan');
+const bodyParser = require("body-parser")
 
 const newsRouter = require('./routes/newsRoutes');
 
@@ -17,7 +18,7 @@ app.use(express.static(`${__dirname}/public`));
 
 
 // 3) ROUTES
-app.use('/', newsRouter);
+app.use('/api', newsRouter);
 
 
 module.exports = app;

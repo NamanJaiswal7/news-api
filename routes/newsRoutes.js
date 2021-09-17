@@ -14,7 +14,7 @@ const router = express.Router();
 
 router
   .route('/')
-  
+  .get(newsController.getAllNews)
   .post(newsController.createNews);
 // router.route('/:pgno').get(newsController.getAllNews);
 router

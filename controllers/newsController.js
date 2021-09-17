@@ -1,52 +1,53 @@
+
+
 const News = require('./../models/newsModel');
+const APIFeatures=require('./../utils/ApiFeatures')
 
 
 
+exports.getAllNews = async (req, res) => {
+  try {
+    const features = new APIFeatures(News.find(), req.query)
+    .paginate();
+  const news = await features.query;
 
-// exports.getAllTours = async (req, res) => {
-//   try {
-//     // EXECUTE QUERY
-//     const features = new APIFeatures(Tour.find(), req.query)
-//       .filter()
-//       .sort()
-//       .limitFields()
-//       .paginate();
-//     const tours = await features.query;
 
-//     // SEND RESPONSE
-//     res.status(200).json({
-//       status: 'success',
-//       results: tours.length,
-//       data: {
-//         tours
-//       }
-//     });
-//   } catch (err) {
-//     res.status(404).json({
-//       status: 'fail',
-//       message: err
-//     });
-//   }
-// };
+    // EXECUTE QUERY
+    
+    // SEND RESPONSE
+    res.status(200).json({
+      status: 'success',
+      results: news.length,
+      data: {
+        news 
+      }
+    });
+  } catch (err) {
+    res.status(404).json({
+      status: 'fail',
+      message: err
+    });
+  }
+};
 
-// exports.getTour = async (req, res) => {
-//   try {
-//     const tour = await Tour.findById(req.params.id);
-//     // Tour.findOne({ _id: req.params.id })
+exports.getNews = async (req, res) => {
+  try {
+    const news = await News.findById(req.params.id);
+    // Tour.findOne({ _id: req.params.id })
 
-//     res.status(200).json({
-//       status: 'success',
-//       data: {
-//         tour
-//       }
-//     });
-//   } catch (err) {
-//     res.status(404).json({
-//       status: 'fail',
-//       message: err
-//     });
-//   }
-// };
+    res.status(200).json({
+      status: 'success',
+      data: {
+        news
+      }
+    });
+  } catch (err) {
+    res.status(404).json({
+      status: 'fail',
+      message: err
+    });
+  }
+};
 
 exports.createNews = async (req, res) => {
   try {
@@ -90,7 +91,7 @@ exports.updateNews = async (req, res) => {
   }
 };
 
-exports.deleteTour = async (req, res) => {
+exports.deleteNews = async (req, res) => {
   try {
     await News.findByIdAndDelete(req.params.id);
 
